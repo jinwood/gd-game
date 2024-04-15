@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvkkirnl8eoex"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_jp5lp"]
+[ext_resource type="Texture2D" uid="uid://clyopjlbc3172" path="res://art/enemyFlyingAlt_1.png" id="1_pegxk"]
+[ext_resource type="Texture2D" uid="uid://dq4uh7cee6xnx" path="res://art/enemyFlyingAlt_2.png" id="2_hukko"]
+[ext_resource type="Texture2D" uid="uid://bf7b1sblc47cu" path="res://art/enemySwimming_1.png" id="3_y0ao0"]
+[ext_resource type="Texture2D" uid="uid://bq8exadb5n6j2" path="res://art/enemySwimming_2.png" id="4_o4jip"]
+[ext_resource type="Texture2D" uid="uid://dms8seba5v5wh" path="res://art/enemyWalking_1.png" id="5_beurg"]
+[ext_resource type="Texture2D" uid="uid://r73uk7chf4c8" path="res://art/enemyWalking_2.png" id="6_lw5kx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o2hcf"]
+radius = 37.0
+height = 100.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3dvx0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pegxk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hukko")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_y0ao0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o4jip")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_beurg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lw5kx")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[node name="Mob" type="RigidBody2D"]
+script = ExtResource("1_jp5lp")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_o2hcf")
+metadata/_edit_group_ = true
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_3dvx0")
+animation = &"swim"
+frame_progress = 0.942177
+metadata/_edit_group_ = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
