@@ -48,7 +48,7 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="Mob" type="RigidBody2D"]
+[node name="Mob" type="RigidBody2D" groups=["mobs"]]
 script = ExtResource("1_jp5lp")
 metadata/_edit_group_ = true
 
